@@ -39,7 +39,7 @@ namespace RPAWebApplicationv2.Controllers
 
         private void updateLucene(RPAResult sampleDataFileRow)
         {
-            string strIndexPath = System.Configuration.ConfigurationManager.AppSettings["luceneIndexPath"];
+            string strIndexPath = getLucenePath();
 
             Analyzer analyzer = new StandardAnalyzer(Lucene.Net.Util.Version.LUCENE_30);
             Directory luceneIndexDirectory;
@@ -72,10 +72,16 @@ namespace RPAWebApplicationv2.Controllers
         // GET: /Search/RebuildIndex/ 
         public string RebuildIndex()
         {
-            string strIndexPath = System.Configuration.ConfigurationManager.AppSettings["luceneIndexPath"];
-
+            string strIndexPath = getLucenePath();
             rebuildLucene(strIndexPath);
 
+            return strIndexPath;
+        }
+
+        private string getLucenePath()
+        {
+            string strIndexPath = System.Configuration.ConfigurationManager.AppSettings["luceneIndexPath"];
+            strIndexPath = AppDomain.CurrentDomain.BaseDirectory + "\\" + strIndexPath;
             return strIndexPath;
         }
 

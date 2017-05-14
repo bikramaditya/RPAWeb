@@ -28,7 +28,7 @@ namespace RPAWebApplicationv2
         [WebMethod]
         public RPATicket GetSearchResults(RPATicket ticket)
         {
-            string strIndexPath = System.Configuration.ConfigurationManager.AppSettings["luceneIndexPath"];
+            string strIndexPath = getLucenePath();
 
             Analyzer analyzer = new StandardAnalyzer(Lucene.Net.Util.Version.LUCENE_30);
 
@@ -70,7 +70,7 @@ namespace RPAWebApplicationv2
         [WebMethod]
         public void UpdateLucene(RPAResult sampleDataFileRow)
         {
-            string strIndexPath = System.Configuration.ConfigurationManager.AppSettings["luceneIndexPath"];
+            string strIndexPath = getLucenePath();
 
             Analyzer analyzer = new StandardAnalyzer(Lucene.Net.Util.Version.LUCENE_30);
             Directory luceneIndexDirectory;
@@ -97,6 +97,12 @@ namespace RPAWebApplicationv2
                     writer.Dispose();
                 }
             }
+        }
+        private string getLucenePath()
+        {
+            string strIndexPath = System.Configuration.ConfigurationManager.AppSettings["luceneIndexPath"];
+            strIndexPath = AppDomain.CurrentDomain.BaseDirectory + "\\" + strIndexPath;
+            return strIndexPath;
         }
     }
 }
