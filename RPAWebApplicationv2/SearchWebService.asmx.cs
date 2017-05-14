@@ -102,6 +102,10 @@ namespace RPAWebApplicationv2
         {
             string strIndexPath = System.Configuration.ConfigurationManager.AppSettings["luceneIndexPath"];
             strIndexPath = AppDomain.CurrentDomain.BaseDirectory + "\\" + strIndexPath;
+            if (!System.IO.Directory.Exists(strIndexPath))
+            {
+                System.IO.Directory.CreateDirectory(strIndexPath);
+            }
             return strIndexPath;
         }
     }
