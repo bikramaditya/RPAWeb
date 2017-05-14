@@ -289,7 +289,6 @@
     <Content Include="SearchWebService.asmx" />
     <Content Include="secureTicket\GetOptions.asmx" />
     <Content Include="secureTicket\matches.aspx" />
-    <Content Include="secureTicket\objects.txt" />
     <Content Include="secureTicket\TicketDetails.aspx" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
